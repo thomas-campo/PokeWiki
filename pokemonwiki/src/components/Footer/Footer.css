@@ -1,0 +1,42 @@
+.footer {
+    background-color: #3C2D23; /* Color de fondo del footer */
+    color: #fff; /* Color del texto */
+    padding: 20px; /* Espaciado interno del footer */
+}
+
+.contenido-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info-sitio,
+.enlaces,
+.redes-sociales {
+    flex: 1;
+    text-align: left;
+    margin: 0 10px;
+}
+
+.info-sitio h3,
+.enlaces h3,
+.redes-sociales h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.info-sitio p,
+.enlaces ul,
+.redes-sociales ul {
+    margin: 0;
+    padding: 0;
+}
+
+.enlaces ul,
+.redes-sociales ul {
+    list-style: none;
+}
+
+.enlaces ul li,
+.redes-sociales ul li {
+    margin-bottom: 5px;
+}
