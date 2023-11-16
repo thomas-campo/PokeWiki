@@ -1,7 +1,7 @@
 const Button = (prop) => {
     return (
         <>
-            <button className={prop.className} onClick={prop.handleButton}></button>
+            <button className={prop.className} onClick={prop.handleButton}>{prop.direccion}</button>
         </>
     )
 }

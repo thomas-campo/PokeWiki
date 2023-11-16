@@ -2,7 +2,6 @@
 @media screen and (min-width: 992px){
 
     .containerNavBar{
-        background-color: #FFE88D;
         padding: 10px 0;
         width: 100%;
         position: sticky;
@@ -29,8 +28,17 @@ body{
     overflow-x: hidden;
 }
 
+.containerNavBar{
+    background-color: #0C356A;
+    padding: 10px 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    box-shadow: 0px 0px 50px;
+    z-index: 100;
+}
 .BotonNavBar{
-    color: #161515ea;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 700;
 }

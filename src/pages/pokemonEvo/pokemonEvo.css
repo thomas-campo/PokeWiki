@@ -1,0 +1,25 @@
+.containerPokeEvo {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+}
+
+.cardPokeEvo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.titulo {
+  color: aliceblue;
+  text-align: center;
+  margin: 2.5% 0 2.5% 0;
+}
+
+.divButton {
+  justify-self: center;
+  align-self: center;
+}
+
+.button1, .button2 {
+  width: 50%;
+}/*# sourceMappingURL=pokemonEvo.css.map */

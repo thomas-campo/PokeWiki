@@ -11,13 +11,13 @@ const NavBar = () => {
                     <NavLink className='BotonNavBar' to={`/`}>
                         Home
                     </NavLink>
-                    <NavLink className='BotonNavBar' to={`/Pokemones`}>
+                    <NavLink className='BotonNavBar' to={`/pokemones`}>
                         Pokemones
                     </NavLink>
-                    <NavLink className='BotonNavBar' to={`/Tipos`}>
-                        Tipos
+                    <NavLink className='BotonNavBar' to={`/pokemon/1`}>
+                        Evoluciones de Pokemones
                     </NavLink>
-                    <NavLink className='BotonNavBar' to={`/MTs`}>
+                    <NavLink className='BotonNavBar' to={`/mts`}>
                         MTs
                     </NavLink>
                 </Container>

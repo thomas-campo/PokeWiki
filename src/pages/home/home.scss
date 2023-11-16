@@ -1,0 +1,86 @@
+$color-fondo-container: #4F4A45;
+$color-fondo-pokedex1: #FFB000;
+$color-fondo-pokedex2: #ffff;
+$color-texto-info: #3C2D23;
+$color-texto: #ffff;
+$color-borde-stats: #ccc;
+$color-texto-stats: #000000;
+$color-fondo-buttons: #FFB000;
+
+body{
+    background-color: $color-fondo-container;
+}
+
+.containerPokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: $color-fondo-container;
+}
+
+.cardPokemon {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    padding: 2% 0 2% 0;
+}
+
+.pokedexCard {
+    display: grid;
+    background: linear-gradient(to top, $color-fondo-pokedex2 40%, $color-fondo-pokedex1 30%);
+    border-radius: 20%;
+    padding-bottom: 5%;
+    overflow: hidden;
+}
+
+.pokeInfo {
+    background-color: $color-texto-info;
+    color: $color-texto;
+    font-size: x-large;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.pokemonName, .pokemonId {
+    font-family: 'Rubik Mono One', monospace;
+}
+
+.divImg {
+    display: flex;
+    justify-content: center;
+}
+
+.pokemonImg {
+    width: 70%;
+    user-select: none;
+}
+
+.pokedexStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-self: center;
+    text-align: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.hp, .statsAtack, .statsDef, .statsAtackSp, .statsDefSp, .statsSpeed {
+    border-bottom: 1px solid $color-borde-stats;
+    padding-bottom: 10px;
+    color: $color-texto-stats;
+}
+
+.button1, .button2 {
+    padding: 0;
+    font-size: 400%;
+    width: 200%;
+    border-radius: 100%;
+    border: none;
+    user-select: none;
+    text-align: center;
+    background-color: $color-fondo-buttons;
+    background-position: center;
+}
