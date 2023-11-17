@@ -11,7 +11,7 @@
     "build": "react-scripts build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "serve -s build"
+    "start": "node app.js"
   },
   "dependencies": {
     "react": "^18.2.0",
