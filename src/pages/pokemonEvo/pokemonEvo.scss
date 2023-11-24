@@ -1,12 +1,27 @@
+.divCargando{
+    margin: 15%;
+}
+
+.cargando{
+    text-align: center;
+}
+
 .containerPokeEvo{
-    display: grid;
+    display: flex;
     grid-template-columns: (1fr 6fr 1fr);
+    align-items: center;
+    margin: 12% 0 12% 0;
+}
+
+.cardPokemonEvo{
+    width: 20%;
 }
 
 .cardPokeEvo{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 150%;
 }
 
 .titulo{
@@ -16,10 +31,16 @@
 }
 
 .divButton{
-    justify-self: center;
-    align-self: center;
+    background-color: orange;
+    width: 15%;
+    height: 5%;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
-.button1, .button2{
-    width: 50%;
+.divButton a{
+    text-decoration: none;
+    height: min-content;
 }

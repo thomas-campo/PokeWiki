@@ -11,6 +11,9 @@ const NavBar = () => {
                     <NavLink className='BotonNavBar' to={`/`}>
                         Home
                     </NavLink>
+                    <NavLink className='BotonNavBar' to={`/pokedex`}>
+                        Pokedex
+                    </NavLink>
                     <NavLink className='BotonNavBar' to={`/pokemones`}>
                         Pokemones
                     </NavLink>

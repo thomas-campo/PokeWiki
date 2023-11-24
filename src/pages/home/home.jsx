@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
-import Button from "../../components/Button/Button"
+import Card from "../../components/Card/Card.jsx"
 
 import "./home.css"
+import { Link } from "react-router-dom"
 
 const Home = () => {
 
   const [ pokemon , setPokemon ] = useState([])
-  const [ pokemonId , setPokemonId ] = useState(1)
+  const [ pokemonId , setPokemonId ] = useState(1017)
   const [ loading, setLoading ] = useState(true);
 
   useEffect(()=>{
@@ -20,71 +21,44 @@ const Home = () => {
       console.log(data)
       const pokemon = {
         img:  data.sprites.other["official-artwork"].front_default,
-        name: data.name.toUpperCase(),
-        hp: data.stats[0].base_stat,
-        atack: data.stats[1].base_stat,
-        defense: data.stats[2].base_stat,
-        atackSp: data.stats[3].base_stat,
-        defenseSp: data.stats[4].base_stat,
-        speed: data.stats[5].base_stat
+        name: data.name.toUpperCase()
       }
       console.log(pokemon)
       setPokemon(pokemon)
-      if(loading===false){
-        setLoading(!loading)
-      }else{
-        setLoading(loading)
-      }
-    }
-
-    const prevButton = () => {
-      (pokemonId === 1)?
-      setPokemonId(1):
-      setPokemonId(pokemonId-1)
-    }
-
-    const nextButton = () => {
-      (pokemonId === 1017)?
-      setPokemonId(1017):
-      setPokemonId(pokemonId+1)
+      setLoading(false)
     }
 
   return (
     <>
       <div className="containerPokemon">
         { loading ? 
-          <div className="cardPokemon">
-            <div className="buttonContainer1">
-              <Button className="button1" direccion="<"
-              handleButton={()=>{prevButton()}}
-              />
+                <>
+                </>
+                :
+            <div>
+              <h1>Bienvenido al Mundo Pokémon</h1>
+              <p>¡Explora la vasta región de Pokémon y descubre a tus favoritos!</p>
+              <section>
+                <h2>Últimos Pokémon</h2>
+                <div className="pokemon-card">
+                  <Link to={`/pokedex/${pokemonId}`}>
+                    <Card
+                    name={pokemon.name}
+                    img={pokemon.img}
+                    />
+                  </Link>
+                </div>
+                <div className="pokemon-card">
+                  <img src="imagen_pokemon_2.jpg" alt="Nombre del Pokémon 2"/>
+                  <h3>Nombre del Pokémon 2</h3>
+                </div>
+              </section>
+              <section>
+                  <h2>Descubre más sobre Pokémon</h2>
+                  <p>Explora la Pokédex para conocer detalles sobre todos los Pokémon.</p>
+                  <a href="/pokedex">Ir a la Pokédex</a>
+              </section>
             </div>
-            <div className="pokedexCard">
-              <div className="divImg">
-              <img className="pokemonImg" src={pokemon.img} alt={pokemon.name} />
-              </div>
-              <div className="pokeInfo">
-                <h4 className="pokemonName">{pokemon.name}</h4>
-                <h4 className="pokemonId">POKEDEX N°{pokemonId}</h4>
-              </div>
-              <div className="pokedexStats">
-                <p className="hp">Hp: {pokemon.hp}</p>
-                <p className="statsAtack">Ataque: {pokemon.atack}</p>
-                <p className="statsDef">Defensa: {pokemon.defense}</p>
-                <p className="statsAtackSp">Ataque Especial: {pokemon.atackSp}</p>
-                <p className="statsDefSp">Defensa Especial: {pokemon.defenseSp}</p>
-                <p className="statsSpeed">Velocidad: {pokemon.speed}</p>
-              </div>
-            </div>
-            <div className="buttonContainer2">
-              <Button className="button2" direccion=">"
-              handleButton={()=>{nextButton()}}
-              />
-            </div>
-          </div>
-          :
-          <>
-          </>
         }
       </div>
     </>

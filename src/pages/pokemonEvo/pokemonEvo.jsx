@@ -1,42 +1,61 @@
 import { useEffect, useState } from "react";
-import "./pokemonEvo.css"
+import "./pokemonEvo.css";
 import Card from "../../components/Card/Card";
-import Button from "../../components/Button/Button.jsx"
+import { Link, useParams } from "react-router-dom";
 
 const PokemonEvo = () => {
-    const [ pokeId, setPokeId ] = useState(1)
-    const [ pokeEvo, setPokeEvo ] = useState([]);
-    const [ loading, setLoading ] = useState(true)
+  let { pid } = useParams();
+  const prevPokemonId = parseInt(pid) > 1 ? parseInt(pid) - 1 : 1;
+  const nextPokemonId = parseInt(pid) > 0 ? parseInt(pid) + 1 : 1;
+  const [pokeEvo, setPokeEvo] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-      fetchEvolution(pokeId)
-    },[pokeId])
+  useEffect(() => {
+    const pokeId = parseInt(pid) > 1 ? (pid) : 1;
+    fetchEvolution(pokeId);
+    console.log("Componente montado");
+  }, [pid]);
 
-
-    const fetchEvolution = async (pokeId) => {
-      setLoading(true);
+  const fetchEvolution = async (pokeId) => {
+    setLoading(true);
+    try {
       const resp = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${pokeId}/`);
+      if (resp.status === 404) {
+        return setPokeEvo([{ name: "Pokemon no encontrado" }]);
+      }
       const data = await resp.json();
-      console.log(data)
-    
+      console.log(data);
+
       const arrayPokemon = [];
       const addPokemon = async (data) => {
-        const pokemonName = data.species.name;
-        const pokemonImg = await fetchPokemonImg(pokemonName);
-        arrayPokemon.push([pokemonName, pokemonImg]);
+        console.log(data);
+        if (data.species) {
+          console.log("arranca el if");
+          const pokemonName = data.species.name;
+          console.log(pokemonName);
+          const pokemonImg = await fetchPokemonImg(pokemonName);
+          arrayPokemon.push([pokemonName, pokemonImg]);
+        } else {
+          console.log("arranca el else");
+          const pokemonName = data.chain.species.name;
+          console.log(pokemonName);
+          const pokemonImg = await fetchPokemonImg(pokemonName);
+          arrayPokemon.push([pokemonName, pokemonImg]);
+        }
       };
 
       const processChain = async (data) => {
         if (data) {
           setLoading(true);
           await addPokemon(data);
-      
-          if (data.evolves_to && data.evolves_to.length > 0) {
+
+          if (data.evolves_to && Array.isArray(data.evolves_to) && data.evolves_to.length > 0) {
             for (const evolution of data.evolves_to) {
               await processChain(evolution);
-      
+
               if (
                 evolution.evolves_to &&
+                Array.isArray(evolution.evolves_to) &&
                 evolution.evolves_to.length > 0 &&
                 !arrayPokemon.some(([name]) => name === evolution.evolves_to[0].species.name)
               ) {
@@ -46,99 +65,63 @@ const PokemonEvo = () => {
           }
         }
       };
-    
+
       await processChain(data.chain);
-    
+
       setPokeEvo(arrayPokemon);
+    } catch (error) {
+      console.error("Error al obtener la cadena de evolución:", error);
+    } finally {
       setLoading(false);
-    }; 
+    }
+  };
 
-    const fetchPokemonImg = async (pokemonName) => {
-      setLoading(true);
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
-      const data = await resp.json();
-      return data.sprites.other["official-artwork"].front_default;
+  const fetchPokemonImg = async (pokemonName) => {
+    try {
+      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`);
+      if (resp.ok) {
+        const data = await resp.json();
+        return data.sprites.other["official-artwork"].front_default;
+      } else {
+        console.error(`Error al obtener la imagen de ${pokemonName}: ${resp.status} - ${resp.statusText}`);
+        return ''; 
+      }
+    } catch (error) {
+      console.error(`Error al obtener la imagen de ${pokemonName}: ${error.message}`);
+      return '';
     }
-    
-    const prevButton = () => {
-      (pokeId===1)?
-      setPokeId(1)
-      :
-      setPokeId(pokeId-1)
-    }
-
-    const nextButton = () => {
-      (pokeId === 1017)?
-      setPokeId(1017):
-      setPokeId(pokeId+1)
-    }
+  };
 
   return (
     <>
-      {
-        loading ?
-        <h1>cargando</h1> :
+      {loading ? (
+        <div className="divCargando">
+          <h1 className="cargando">cargando...</h1>
+        </div>
+      ) : (
         <div>
           <h2 className="titulo">Evoluciones de pokemon</h2>
           <div className="containerPokeEvo">
-            <div className="divButton">
-              <Button className="button1"
-              handleButton={()=>{prevButton()}}
-              direccion="<"
-              />
-            </div>
+            {
+              pid>1 ?
+              <div className="divButton">
+                <Link to={`/pokemon/${prevPokemonId}`}>PREV</Link>
+              </div> :
+             <div className="divButton"></div>
+            }
             <div className="cardPokeEvo">
-              {pokeEvo.map( pokemon =>(
-                <Card
-                  key={pokemon[0]}
-                  name={pokemon[0]}
-                  img={pokemon[1]}
-                />
-              ))
-              }
+              {pokeEvo.map((pokemon) => (
+                <Card key={pokemon[0]} className="cardPokemonEvo" name={pokemon[0]} img={pokemon[1]} />
+                ))}
             </div>
             <div className="divButton">
-              <Button className="button2"
-              handleButton={()=>{nextButton()}}
-              direccion=">"
-              />
+              <Link to={`/pokemon/${nextPokemonId}`}>NEXT</Link>
             </div>
           </div>
         </div>
-      }
+      )}
     </>
-  )
-}
+  );
+};
 
-export default PokemonEvo
-
-    // const fetchEvolution = async (pokeId) =>{
-    //   const resp = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${pokeId}/`)
-    //   const data = await resp.json();
-    //   console.log(data)
-    //   const arrayPokemon = [];
-    //   const pokemonName1 = data.chain.species.name
-    //   const pokemonImg1 = await fetchPokemonImg(pokemonName1)
-    //   arrayPokemon.push([pokemonName1,pokemonImg1])
-    //   if(data.chain.evolves_to.length === 1){
-    //     const pokemonName2 = data.chain.evolves_to[0].species.name;
-    //     const pokemonImg2 = await fetchPokemonImg(pokemonName2)
-    //     arrayPokemon.push([pokemonName2, pokemonImg2]);
-    //     console.log(arrayPokemon)
-    //     if(data.chain.evolves_to[0].evolves_to.length !== 0){
-    //       const pokemonName3 = data.chain.evolves_to[0].evolves_to[0].species.name;
-    //       const pokemonImg3 = await fetchPokemonImg(pokemonName3);
-    //       arrayPokemon.push([pokemonName3, pokemonImg3]);
-    //       console.log(arrayPokemon)
-    //     }
-    //   }if(data.chain.evolves_to.length !== 0){
-    //     const array = data.chain.evolves_to;
-    //     array.forEach(async(pokemon)=>{
-    //       const pokemonName = pokemon.species.name;
-    //       const pokemonImg = await fetchPokemonImg(pokemonName)
-    //       arrayPokemon.push([pokemonName,pokemonImg])
-    //     })
-    //   }
-    //   setPokeEvo(arrayPokemon)
-    //   setLoading(false);
-    // }
+export default PokemonEvo;

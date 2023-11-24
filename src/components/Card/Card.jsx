@@ -1,7 +1,7 @@
 const Card = (prop) => {
     return (
         <>
-            <div>
+            <div className={prop.className}>
                 <div className="pokeInfo">
                     <h4 className="pokemonName">{prop.name}</h4>
                 </div>
