@@ -48,15 +48,11 @@ const Home = () => {
                     />
                   </Link>
                 </div>
-                <div className="pokemon-card">
-                  <img src="imagen_pokemon_2.jpg" alt="Nombre del Pokémon 2"/>
-                  <h3>Nombre del Pokémon 2</h3>
-                </div>
               </section>
               <section>
                   <h2>Descubre más sobre Pokémon</h2>
-                  <p>Explora la Pokédex para conocer detalles sobre todos los Pokémon.</p>
-                  <a href="/pokedex">Ir a la Pokédex</a>
+                  <h4>Explora la Pokédex para conocer detalles sobre todos los Pokémon.</h4>
+                  <a href="/pokedex/1"><button>Ir a la Pokédex</button></a>
               </section>
             </div>
         }

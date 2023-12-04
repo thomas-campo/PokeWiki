@@ -1,39 +1,55 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/Button/Button";
 import { Link, useParams } from "react-router-dom";
+import PokemonEvo from "../pokemonEvo/pokemonEvo";
 
 const Pokedex = () => {
   let { pid } = useParams() ;
   const [ pokemon , setPokemon ] = useState([])
-  const prevPokemonId = parseInt(pid) > 1 ? parseInt(pid) - 1 : 1;
-  const nextPokemonId = parseInt(pid) > 0 ? parseInt(pid) + 1 : 1;
+  const [ evoId , setEvoId ] = useState(null)
   const [ loading, setLoading ] = useState(true);
+  const prevPokemonId = parseInt(pid) > 1 ? parseInt(pid) - 1 : 1017;
+  const nextPokemonId = parseInt(pid) < 1017 ? parseInt(pid) + 1 : 1;
   
   useEffect(()=>{
-    const pokeId = parseInt(pid) > 1 ? (pid) : 1;
-    fetchPokemon(pokeId)
+    fetchPokemon(pid)
   },[pid])
   
-    const fetchPokemon = async (pokemonId) => {
-      setLoading(true);
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
-      const data = await resp.json();
-      console.log(data)
-      const pokemon = {
-        img:  data.sprites.other["official-artwork"].front_default,
-        name: data.name.toUpperCase(),
-        hp: data.stats[0].base_stat,
-        atack: data.stats[1].base_stat,
-        defense: data.stats[2].base_stat,
-        atackSp: data.stats[3].base_stat,
-        defenseSp: data.stats[4].base_stat,
-        speed: data.stats[5].base_stat
-      }
-      console.log(pokemon)
-      setPokemon(pokemon)
-      setLoading(false)
+  const fetchPokemon = async (pokemonId) => {
+    setLoading(true);
+    const pokeId = parseInt(pokemonId) > 1 ? (pokemonId) : 1;
+    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeId}/`)
+    const data = await resp.json();
+    console.log(data)
+    const pokemon = {
+      img:  data.sprites.other["official-artwork"].front_default,
+      name: data.name.toUpperCase(),
+      hp: data.stats[0].base_stat,
+      atack: data.stats[1].base_stat,
+      defense: data.stats[2].base_stat,
+      atackSp: data.stats[3].base_stat,
+      defenseSp: data.stats[4].base_stat,
+      speed: data.stats[5].base_stat,
+      url: data.species.url
     }
+    console.log(pokemon)
+    setPokemon(pokemon)
+    setLoading(false)
+  }
+
+  useEffect(()=>{
+    fetchPokeEvo(pokemon)
+  },[pokemon])
   
+  const fetchPokeEvo = async(pokemon) => {
+    const resp = await fetch(pokemon.url)
+    const data = await resp.json()
+    console.log(data.evolution_chain.url)
+    const resp2 = await fetch(data.evolution_chain.url)
+    const data2 = await resp2.json()
+    console.log(data2,"data2")
+    setEvoId(data2.id)
+  } 
+
   return (
     <>
       <div className="containerPokemon">
@@ -41,7 +57,8 @@ const Pokedex = () => {
           <>
           </>
           :
-          <div className="cardPokemon">
+          <div>
+            <div className="cardPokemon">
             <div className="divButton">
               <Link to={`/pokedex/${prevPokemonId}`}>PREV</Link>
             </div>
@@ -65,6 +82,14 @@ const Pokedex = () => {
             <div className="divButton">
               <Link to={`/pokedex/${nextPokemonId}`}>NEXT</Link>
             </div>
+            </div>
+            {evoId ? (
+            <div>
+              <PokemonEvo pokeId={evoId}/>
+            </div>
+            ) :
+            <></>
+            }
           </div>
         }
       </div>

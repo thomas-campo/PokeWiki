@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import "./pokemonEvo.css";
 import Card from "../../components/Card/Card";
-import { Link, useParams } from "react-router-dom";
+// import { Link, useParams } from "react-router-dom";
 
-const PokemonEvo = () => {
-  let { pid } = useParams();
-  const prevPokemonId = parseInt(pid) > 1 ? parseInt(pid) - 1 : 1;
-  const nextPokemonId = parseInt(pid) > 0 ? parseInt(pid) + 1 : 1;
+const PokemonEvo = ({pokeId}) => {
+  // let { pid } = useParams();
+  // const prevPokemonId = parseInt(pid) > 1 ? parseInt(pid) - 1 : 1;
+  // const nextPokemonId = parseInt(pid) > 0 ? parseInt(pid) + 1 : 1;
   const [pokeEvo, setPokeEvo] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const pokeId = parseInt(pid) > 1 ? (pid) : 1;
+    console.log(pokeId,"pokeId")
+    // const pokeId = pokeId;
     fetchEvolution(pokeId);
     console.log("Componente montado");
-  }, [pid]);
+  }, [pokeId]);
 
   const fetchEvolution = async (pokeId) => {
     setLoading(true);
@@ -30,13 +31,11 @@ const PokemonEvo = () => {
       const addPokemon = async (data) => {
         console.log(data);
         if (data.species) {
-          console.log("arranca el if");
           const pokemonName = data.species.name;
           console.log(pokemonName);
           const pokemonImg = await fetchPokemonImg(pokemonName);
           arrayPokemon.push([pokemonName, pokemonImg]);
         } else {
-          console.log("arranca el else");
           const pokemonName = data.chain.species.name;
           console.log(pokemonName);
           const pokemonImg = await fetchPokemonImg(pokemonName);
@@ -102,21 +101,21 @@ const PokemonEvo = () => {
         <div>
           <h2 className="titulo">Evoluciones de pokemon</h2>
           <div className="containerPokeEvo">
-            {
+            {/* {
               pid>1 ?
               <div className="divButton">
                 <Link to={`/pokemon/${prevPokemonId}`}>PREV</Link>
               </div> :
              <div className="divButton"></div>
-            }
+            } */}
             <div className="cardPokeEvo">
               {pokeEvo.map((pokemon) => (
                 <Card key={pokemon[0]} className="cardPokemonEvo" name={pokemon[0]} img={pokemon[1]} />
                 ))}
             </div>
-            <div className="divButton">
+            {/* <div className="divButton">
               <Link to={`/pokemon/${nextPokemonId}`}>NEXT</Link>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

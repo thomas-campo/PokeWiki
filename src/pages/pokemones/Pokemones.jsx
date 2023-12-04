@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react"
 import Card from "../../components/Card/Card"
 import "./pokemones.css"
-import Button from "../../components/Button/Button"
+import { Link } from "react-router-dom"
 
 const Pokemones = () => {
     const [loading, setLoading ] = useState(true)
     const [ nextUrl, setNextUrl ] = useState()
     const [ previousUrl, setPreviousUrl ] = useState()
     const [ count, setCount ] = useState()
-    // const [ limitPoke, setLimitPoke ] = useState([])
     const [ generations, setGenerations ] = useState([])
-    // const [ generationsOn, setGenerationsOn ] = useState(false)
     const [ types, setTypes ] = useState([]) 
-    // const [ typesOn, setTypesOn ] = useState(false) 
-    // const [ selectedGeneration, setSelectedGeneration] = useState([])
     const [ pokemones, setPokemones] = useState([])
 
     useEffect(()=>{
@@ -22,31 +18,33 @@ const Pokemones = () => {
     
     const fetchPokemones = async() => {
 
-        const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
+        const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200&offset=0")
         const data = await resp.json()
-        console.log(data.results)
-        console.log(data)
         setCount(1)
         setPreviousUrl(data.previous)
         setNextUrl(data.next)
-        const arrayPokemones = data.results.map(async(pokemon)=>{
+        const arrayPokemones = await Promise.all(data.results.map(async(pokemon)=>{
             const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
             if(resp.status===404){
-                const poke= {
-                    name:pokemon.name
-                }
-                return poke;
+                return null;
             }
+
             const data = await resp.json()
+
+            if(!data.sprites.front_default){
+                return null;
+            }
 
             const poke = {
                 name: pokemon.name,
-                img: data.sprites.front_default
+                img: data.sprites.front_default,
+                id: data.id
             }
 
             return poke;
-        })
-        setPokemones(await Promise.all(arrayPokemones))
+        }))
+        const filteredPokemones = arrayPokemones.filter(pokemon => pokemon !== null);
+        setPokemones(filteredPokemones);
         setLoading(false)
     }
 
@@ -58,40 +56,41 @@ const Pokemones = () => {
     const Types = async() => {
         const resp = await fetch("https://pokeapi.co/api/v2/type")
         const data = await resp.json();
-        console.log(data.results)
         setTypes(data.results)
     }
 
-    const fetchTypes = async(types) => {
-        const resp = await fetch(`https://pokeapi.co/api/v2/type/${types}`)
-        const data = await resp.json()
-        setPreviousUrl()
-        setNextUrl()
-        setCount()
-        console.log(data.pokemon);
-        const arrayTypes = data.pokemon.map(async(pokemon)=>{
-            const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`)
-            if(resp.status===404){
-                const pokemones= {
-                    name:pokemon.name
-                }
-                return pokemones;
+    const fetchTypes = async (types) => {
+        const resp = await fetch(`https://pokeapi.co/api/v2/type/${types}`);
+        const data = await resp.json();
+        setPreviousUrl();
+        setNextUrl();
+        setCount();
+    
+        const arrayTypes = await Promise.all(data.pokemon.map(async (pokemon) => {
+            const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`);
+            if (resp.status === 404) {
+                return null;
             }
-            const data = await resp.json()
+            const data = await resp.json();
+            if (!data.sprites.front_default) {
+                return null;
+            }
             const pokemones = {
                 name: data.name,
-                img: data.sprites.front_default
-            }
-            return pokemones
-        })
-        console.log(await Promise.all(arrayTypes),"arrayTypes")
-        setPokemones(await Promise.all(arrayTypes))
-    }
+                img: data.sprites.front_default,
+                id: data.id
+            };
+            return pokemones;
+        }));
+    
+        const filteredPokemones = arrayTypes.filter(pokemon => pokemon !== null);
+        setPokemones(filteredPokemones);
+    };
+    
 
     const Generations = async() => {
         const resp = await fetch("https://pokeapi.co/api/v2/generation")
         const data = await resp.json()
-        console.log(data.results)
         setGenerations(data.results)
     }
 
@@ -101,78 +100,57 @@ const Pokemones = () => {
         setPreviousUrl()
         setNextUrl()
         setCount()
-        console.log(data.pokemon_species)
-        const arrayTypes = data.pokemon_species.map(async(pokemon)=>{
+        const arrayTypes = Promise.all(data.pokemon_species.map(async(pokemon)=>{
             const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
             if(resp.status===404){
-                const pokemones= {
-                    name:pokemon.name
-                }
-                return pokemones;
+                return null;
             }
             const data = await resp.json()
+            if (!data.sprites.front_default) {
+                return null;
+            }
             const pokemones = {
                 name: data.name,
                 img: data.sprites.front_default
             }
             return pokemones
-        })
-        console.log(await Promise.all(arrayTypes),"arrayTypes")
-        setPokemones(await Promise.all(arrayTypes))
+        }));
+        const filteredPokemones = arrayTypes.filter(pokemon => pokemon !== null);
+        setPokemones(filteredPokemones);
     }
 
     const limitPokemon = async(btn) => {
+        let url = "url"
         if(btn==="next"){
-            const resp = await fetch(nextUrl)
+            url = nextUrl;
+        }
+        if(btn==="previous"){
+            url = previousUrl
+        }
+        const resp = await fetch(url)
             const data = await resp.json()
-            console.log(data,"data del next")
             setCount(count+1)
             setPreviousUrl(data.previous)
             setNextUrl(data.next)
-            const arrayPokemones = data.results.map(async(pokemon)=>{
+            const arrayPokemones = await Promise.all(data.results.map(async(pokemon)=>{
                 const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
                 if(resp.status===404){
-                    const poke= {
-                        name:pokemon.name
-                    }
-                    return poke;
+                    return null;
                 }
                 const data = await resp.json()
-                
+                if(!data.sprites.front_default){
+                    return null;
+                }
                 const poke = {
                     name: pokemon.name,
-                    img: data.sprites.front_default
+                    img: data.sprites.front_default,
+                    id: data.id
                 }
                 
                 return poke;
-            })
-            setPokemones(await Promise.all(arrayPokemones))
-        }else if(btn==="previous"){
-            const resp = await fetch(previousUrl)
-            const data = await resp.json()
-            console.log(data,"data del previous")
-            setCount(count-1)
-            setPreviousUrl(data.previous)
-            setNextUrl(data.next)
-            const arrayPokemones = data.results.map(async(pokemon)=>{
-                const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-                if(resp.status===404){
-                    const poke= {
-                        name:pokemon.name
-                    }
-                    return poke;
-                }
-                const data = await resp.json()
-                
-                const poke = {
-                    name: pokemon.name,
-                    img: data.sprites.front_default
-                }
-                
-                return poke;
-            })
-            setPokemones(await Promise.all(arrayPokemones))
-        }
+            }))
+            const filteredPokemones = arrayPokemones.filter(pokemon => pokemon !== null);
+            setPokemones(filteredPokemones);
     }
 
     return (
@@ -226,12 +204,34 @@ const Pokemones = () => {
                     </div>
                     <div className="containerCards">
                         {pokemones.map(pokemon=>(
+                                <Link key={pokemon.name} to={`/pokedex/${pokemon.id}`}>
                                     <Card
-                                    key={pokemon.name}
                                     name={pokemon.name}
                                     img={pokemon.img}
-                                />
+                                    />
+                                </Link>
                             ))}
+                    </div>
+                    <div className="paginateButtons">
+                    {
+                        previousUrl ?
+                        <button onClick={()=>{limitPokemon("previous")}}>Anterior</button>
+                        :
+                        <></>
+                    }
+                    {
+                        count ?
+                        <p>{count}</p>
+                        :
+                        <></>
+                    }
+                    {
+                        nextUrl ?
+                        <button onClick={()=>{limitPokemon("next")}}>Siguiente</button>
+                        :
+                        <></>
+
+                    }
                     </div>
                 </div>
                 }
