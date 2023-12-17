@@ -7,7 +7,7 @@ const NavBar = () => {
         
                 <div className='container'>
                     <NavLink className='BotonNavBarLogo' to={`/`}>
-                        <img className="logoPokeWiki" src="../../../public/2Z3UanLFRGiuyP9qmnd74AsNqx3.svg.svg" alt="" />
+                        <img className="logoPokeWiki" src="../../../2Z3UanLFRGiuyP9qmnd74AsNqx3.svg.svg" alt="" />
                     </NavLink>
                     <NavLink className='BotonNavBar' to={`/pokedex`}>
                         Pokedex
