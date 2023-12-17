@@ -2,11 +2,11 @@ const Card = (prop) => {
     return (
         <>
             <div className={prop.className}>
-                <div className="pokeInfo">
-                    <h4 className="pokemonName">{prop.name}</h4>
+                <div className="imgPoke">
+                    <img className="" src={prop.img} alt={prop.name} />
                 </div>
-                <div className="divImg">
-                    <img className="pokemonImg" src={prop.img} alt={prop.name} />
+                <div className="namePoke">
+                    <h4 className="">{prop.content}</h4>
                 </div>
             </div>
         </>

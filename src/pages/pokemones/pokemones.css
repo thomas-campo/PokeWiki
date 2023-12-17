@@ -1,14 +1,335 @@
-.containerGeneration {
-  text-align: center;
+body {
+  background-color: #d7f4fd;
 }
 
-.containerCards {
+.titulo {
+  text-align: center;
+  font-size: 250%;
+  margin: 30px 0 10px 0;
+}
+
+.filtro {
+  padding: 20px 5px;
+}
+
+.filtrar {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  margin: 0 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(80, 67, 67, 0.9843137255);
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.dropdown:focus-within .dropdown-content {
+  text-align: center;
+  display: block;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  right: -44px;
+}
+
+.button-inside-dropdown {
+  display: block;
+  text-decoration: none;
+  background-color: #04557e;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+.button-inside-dropdown:hover {
+  background-color: #2f7396;
+}
+.button-inside-dropdown:active {
+  background-color: #023650;
 }
 
 .paginateButtons {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.button {
+  background-color: #04557e;
+  padding: 7px 15px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  color: white;
+  margin: 0 10px;
+}
+.button:hover {
+  background-color: #2f7396;
+}
+.button:active {
+  background-color: #023650;
+}
+
+.btn1 {
+  grid-column: 4;
+}
+
+.btn2 {
+  grid-column: 5;
+}
+
+.btn3 {
+  grid-column: 6;
+}
+
+.divInvisibleSiguiente {
+  width: 115px;
+  border: 1px solid transparent;
+}
+
+.divInvisibleAntes {
+  width: 105px;
+  border: 1px solid transparent;
+}
+
+.normal, .fighting, .steel, .ground, .electric, .rock, .fire, .water, .grass, .poison, .psychic, .bug, .dark, .dragon, .ice, .ghost, .flying, .fairy, .generation-i, .generation-ii, .generation-iii, .generation-iv, .generation-ix, .generation-v, .generation-vi, .generation-vii, .generation-viii {
+  height: 30px;
+  width: 100%;
+}
+
+.normal {
+  background-color: #99a5b1;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.fighting {
+  background-color: #de3464;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.steel {
+  background-color: #4b9ab8;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.ground {
+  background-color: #f5712c;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.rock {
+  background-color: #decd8c;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.fairy {
+  background-color: #fa91f4;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.dark {
+  background-color: #544b65;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+}
+
+.dragon {
+  background-color: #0f03b8;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.ice {
+  background-color: #69e6d7;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.psychic {
+  background-color: #ff6b72;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.electric {
+  background-color: #ffe528;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.grass {
+  background-color: #55d749;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.water {
+  background-color: #3599f0;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.fire {
+  background-color: #ffa94b;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.flying {
+  background-color: #99b7f1;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.ghost {
+  background-color: #4061ca;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.bug {
+  background-color: #9de013;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.poison {
+  background-color: #bd5ce3;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-i {
+  background-color: #494343;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+}
+
+.generation-ii {
+  background-color: #05a300;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-iii {
+  background-color: #fcf813;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-iv {
+  background-color: #b808db;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-v {
+  background-color: #0816db;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-vi {
+  background-color: #08dbdb;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-vii {
+  background-color: #55db08;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-viii {
+  background-color: #db0808;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.generation-ix {
+  background-color: #ff8800;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.containerPokemones {
+  margin: 0 40px;
+}
+
+.containerListaPokemones {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.linkCard {
+  width: -moz-min-content;
+  width: min-content;
+}
+
+.containerCards {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 0 20px 0;
+}
+
+.cardPokemon {
+  background-color: #9b2121;
+  height: 210px;
+  padding: 15px 15px 25px 15px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
+  border-radius: 30px;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5568627451);
+  transition: transform 0.3s linear, box-shadow 0.3s linear;
+  position: relative;
+}
+.cardPokemon:hover {
+  background-color: #04557e;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.384);
+  transition: transform 0.3s linear, box-shadow 0.3s linear, background-color 0.3s linear;
+}
+
+.namePoke {
+  text-decoration: none;
+}
+
+.namePoke h4 {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background-color: rgba(80, 67, 67, 0.9843137255);
+  color: #ffffff;
+}
+
+.imgPoke img {
+  width: 207px;
 }/*# sourceMappingURL=pokemones.css.map */

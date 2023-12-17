@@ -7,16 +7,15 @@ import { Link } from "react-router-dom"
 const Home = () => {
 
   const [ pokemon , setPokemon ] = useState([])
-  const [ pokemonId , setPokemonId ] = useState(1017)
   const [ loading, setLoading ] = useState(true);
 
   useEffect(()=>{
-    fetchPokemon(pokemonId)
-  },[pokemonId])
+    fetchPokemon()
+  },[])
 
-    const fetchPokemon = async (pokemonId) => {
+    const fetchPokemon = async () => {
       setLoading(true);
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
+      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${1017}/`)
       const data = await resp.json();
       console.log(data)
       const pokemon = {
@@ -41,9 +40,9 @@ const Home = () => {
               <section>
                 <h2>Últimos Pokémon</h2>
                 <div className="pokemon-card">
-                  <Link to={`/pokedex/${pokemonId}`}>
+                  <Link to={`/pokedex/${1017}`}>
                     <Card
-                    name={pokemon.name}
+                    content={`${pokemon.name}`}
                     img={pokemon.img}
                     />
                   </Link>

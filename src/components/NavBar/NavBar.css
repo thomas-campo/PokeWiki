@@ -1,22 +1,17 @@
-/*media desktop*/
+/* media desktop */
 @media screen and (min-width: 992px){
 
-    .containerNavBar{
-        padding: 10px 0;
-        width: 100%;
-        position: sticky;
-        top: 0;
-        box-shadow: 0px 0px 50px;
-        z-index: 100;
+    .BotonNavBar{
+        padding: 0px 0px 0px 25px;
     }
 
-    .BotonNavBar{
-        padding: 0px 20px 0px 20px;
+    .BotonNavBarLogo{
+        padding: 0px 0px 0px 25px;
     }
 
 }
 
-/*media celular*/
+/* media celular */
 @media screen and (max-width: 991px ) {
     .BotonNavBar{
         margin: 0px 0 15px 0;
@@ -28,21 +23,76 @@ body{
     overflow-x: hidden;
 }
 
-.containerNavBar{
-    background-color: #0C356A;
-    padding: 10px 0;
-    width: 100%;
+.container{
+    display: flex;
+    align-items: center;
+    background-color: #04557e;
+    /* #7e2121 */
+    padding: 20px 0 20px 35px;
     position: sticky;
+    box-shadow: 0px 0px 1cap #0000007e;
     top: 0;
-    box-shadow: 0px 0px 50px;
     z-index: 100;
 }
+
+.logoPokeWiki{
+    position: absolute;
+    width: 3%;
+    padding: 10px 0 5px 0;
+    bottom: 5px;
+    left: 20px;
+}
+
 .BotonNavBar{
-    color: #ffffff;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     font-weight: 700;
 }
 
 .BotonNavBar:hover{
-    color: #884a39;
+    color: #f5c3c3;
 }
+
+.BotonNavBarLogo:hover{
+    opacity: 75%;
+}
+
+/* NavBar.css */
+
+/* NavBar.css */
+
+/* .container {
+    background-color: #F7DA57;
+    color: #333021;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .BotonNavBarLogo {
+    text-decoration: none;
+    color: #333021;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logoPokeWiki {
+    width: 50px; /* Ajusta el tamaño según tus necesidades */
+    /* margin-right: 10px;
+  }
+  
+  .BotonNavBar {
+    text-decoration: none;
+    color: #333021;
+    padding: 10px;
+    margin-left: 10px;
+  }
+  
+  .BotonNavBar:hover {
+    background-color: #5E5C50;
+  } */
+
+  /* NavBar.css */
+
+/* NavBar.css */

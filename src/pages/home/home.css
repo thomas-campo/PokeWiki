@@ -10,14 +10,6 @@ body {
   background-color: #4F4A45;
 }
 
-.cardPokemon {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  justify-items: center;
-  padding: 2% 0 2% 0;
-}
-
 .pokedexCard {
   display: grid;
   background: linear-gradient(to top, white 40%, #FFB000 30%);

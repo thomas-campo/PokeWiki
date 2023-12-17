@@ -58,7 +58,7 @@ const Pokedex = () => {
           </>
           :
           <div>
-            <div className="cardPokemon">
+            <div className="cardPokedex">
             <div className="divButton">
               <Link to={`/pokedex/${prevPokemonId}`}>PREV</Link>
             </div>
