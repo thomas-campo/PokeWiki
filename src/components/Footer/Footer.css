@@ -1,114 +1,46 @@
-/* .footer {
-    background-color: #444242; /* Color de fondo del footer */
-    /* color: #ffffff; /* Color del texto */
-    /* padding: 20px; Espaciado interno del footer */ */
-/* } */
-/* 
-.contenido-footer {
+.footer {
+  background-color: #504343fb;
+  padding: 20px 0;
+
+  .contenido-footer {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-around;
-}
 
-.info-sitio,
-.enlaces,
-.redes-sociales {
-    flex: 1;
-    text-align: left;
-    margin: 0 10px;
-}
+    .info-sitio, .enlaces, .redes-sociales {
+      text-align: center;
+    }
 
-.info-sitio h3,
-.enlaces h3,
-.redes-sociales h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
+    h3 {
+      color: #ffffff;
+    }
 
-.info-sitio p,
-.enlaces ul,
-.redes-sociales ul {
-    margin: 0;
-    padding: 0;
-}
+    p, ul {
+      color: #c2b4b4;
+    }
 
-.enlaces ul,
-.redes-sociales ul {
-    list-style: none;
-}
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    li {
+      text-decoration: none;
+      margin: 10px 0;
+    }
 
-.enlaces ul li,
-.redes-sociales ul li {
-    margin-bottom: 5px;
-} */
+    a {
+      text-decoration: none;
+      color: #007bff;
 
-/* Footer.css */
-
-/* Footer.css */
-
-/* .footer {
-    background-color: #333021;
-    color: #F7DA57;
-    padding: 20px 0;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
-  
-  .contenido-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .info-sitio, .enlaces, .redes-sociales {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .enlaces ul, .redes-sociales ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .enlaces a, .redes-sociales a {
-    text-decoration: none;
-    color: #F7DA57;
-  }
-  
-  .enlaces a:hover, .redes-sociales a:hover {
-    color: #5E5C50;
-  }
-   */
-
-   /* Footer.css */
-
-/* Footer.css */
-
-.footer {
-  background-color: #6F6FA2;
-  color: #F7DA57;
-  padding: 20px 0;
-}
-
-.contenido-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.info-sitio, .enlaces, .redes-sociales {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.enlaces ul, .redes-sociales ul {
-  list-style: none;
-  padding: 0;
 }
 
 .enlaces a, .redes-sociales a {
   text-decoration: none;
-  color: #F7DA57;
-  transition: color 0.3s ease;
-}
-
-.enlaces a:hover, .redes-sociales a:hover {
-  color: #5757F7;
 }

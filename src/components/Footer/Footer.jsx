@@ -7,7 +7,7 @@ const Footer = () => {
                 <div className="contenido-footer">
                     <div className="info-sitio">
                         <h3>PokeWiki</h3>
-                        <p>Pagina informativa acerca de los pokemon</p>
+                        <p>Pagina informativa acerca de los pokemon, con pokedex, lista de pokemones hasta la fecha</p>
                     </div>
                     <div className="enlaces">
                         <h3>Enlaces</h3>

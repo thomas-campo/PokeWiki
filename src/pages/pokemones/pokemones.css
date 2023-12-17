@@ -319,6 +319,7 @@ body {
 }
 
 .namePoke h4 {
+  font-size: large;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
