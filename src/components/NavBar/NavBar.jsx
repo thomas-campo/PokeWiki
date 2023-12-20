@@ -5,7 +5,7 @@ const NavBar = () => {
     return (
         <>
         
-                <div className='container'>
+                <div className='containerNavBar'>
                     <NavLink className='BotonNavBarLogo' to={`/`}>
                         <img className="logoPokeWiki" src="../../../2Z3UanLFRGiuyP9qmnd74AsNqx3.svg.svg" alt="" />
                     </NavLink>

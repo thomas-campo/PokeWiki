@@ -76,7 +76,7 @@ const Pokemones = () => {
                 return null;
             }
             const pokemones = {
-                name: data.name,
+                name: data.name.toUpperCase(),
                 img: data.sprites.other["official-artwork"].front_default,
                 id: data.id
             };
@@ -111,7 +111,7 @@ const Pokemones = () => {
                 return null;
             }
             const pokemones = {
-                name: data.name,
+                name: data.name.toUpperCase(),
                 img: data.sprites.other["official-artwork"].front_default,
                 id: data.id
             }
@@ -152,7 +152,7 @@ const Pokemones = () => {
                     return null;
                 }
                 const poke = {
-                    name: pokemon.name,
+                    name: pokemon.name.toUpperCase(),
                     img: data.sprites.other["official-artwork"].front_default,
                     id: data.id
                 }
@@ -177,7 +177,7 @@ const Pokemones = () => {
     return (
         <div className={`containerPokemones`}>
             {loading ?
-                <h1>cargando...</h1> :
+                <h2>cargando...</h2> :
                 <div className="containerListaPokemones">
                     <h1 className="titulo">Pokemones</h1>
                     <div className="filtro">

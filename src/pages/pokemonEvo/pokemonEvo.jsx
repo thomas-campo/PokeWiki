@@ -99,7 +99,7 @@ const PokemonEvo = ({pokeId}) => {
         </div>
       ) : (
         <div>
-          <h2 className="titulo">Evoluciones de pokemon</h2>
+          <h2 className="tituloEvo">Evoluciones de pokemon</h2>
           <div className="containerPokeEvo">
             {/* {
               pid>1 ?
