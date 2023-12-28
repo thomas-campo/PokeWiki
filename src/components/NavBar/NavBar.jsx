@@ -9,7 +9,7 @@ const NavBar = () => {
                     <NavLink className='BotonNavBarLogo' to={`/`}>
                         <img className="logoPokeWiki" src="../../../2Z3UanLFRGiuyP9qmnd74AsNqx3.svg.svg" alt="" />
                     </NavLink>
-                    <NavLink className='BotonNavBar' to={`/pokedex`}>
+                    <NavLink className='BotonNavBar' to={`/pokedex/1`}>
                         Pokedex
                     </NavLink>
                     <NavLink className='BotonNavBar' to={`/pokemones`}>
